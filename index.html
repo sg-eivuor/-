@@ -6,11 +6,12 @@
     <title>스마트베네핏 - 카드 혜택 계산기</title>
     <meta name="description" content="더모아(The More) vs 디지로카 런던. 결제 금액만 입력하면 최대 혜택 카드를 찾아드립니다." />
     
-    <!-- Open Graph for Social Sharing (KakaoTalk, iMessage, Facebook) -->
+    <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="스마트베네핏 - 카드 혜택 최적화" />
     <meta property="og:description" content="5000원 이상 결제 시 잔돈 적립 vs 1.7% 할인, 무엇이 더 이득일까요? 바로 계산해보세요." />
     <meta property="og:type" content="website" />
     
+    <!-- Tailwind CSS (via CDN for simplicity) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -19,16 +20,20 @@
   <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "vite": "https://esm.sh/vite@^7.2.7"
   }
 }
 </script>
 </head>
   <body class="bg-gray-50 text-gray-900">
     <div id="root"></div>
+    <!-- VITAL: Connect the React entry file here -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
