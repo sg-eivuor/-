@@ -1,12 +1,17 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { BenefitRule, MerchantCategory } from "../types";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+// Fix: Use import.meta.env for Vite, or fallback to empty string to prevent "process is not defined" error in browser
+const apiKey = import.meta.env?.VITE_API_KEY || '';
+let ai: GoogleGenAI | null = null;
+
+if (apiKey) {
+  ai = new GoogleGenAI({ apiKey });
+}
 
 export const parseCardBenefits = async (text: string): Promise<BenefitRule[]> => {
-  if (!apiKey) {
-    console.error("API Key is missing");
+  if (!apiKey || !ai) {
+    console.warn("API Key is missing or AI not initialized");
     return [];
   }
 
@@ -95,7 +100,7 @@ export const parseCardBenefits = async (text: string): Promise<BenefitRule[]> =>
 };
 
 export const suggestCategory = async (merchantName: string): Promise<MerchantCategory> => {
-    if (!apiKey) return MerchantCategory.ALL;
+    if (!apiKey || !ai) return MerchantCategory.ALL;
 
     try {
         const response = await ai.models.generateContent({
